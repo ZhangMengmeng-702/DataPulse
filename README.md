@@ -1,5 +1,7 @@
 # DataPulse · 数据脉动
 
+> 生产实习——数据脉动
+>
 > 一个公开的数据可视化大屏项目
 
 DataPulse（数据脉动）是一个用于构建实时数据可视化大屏的开源项目，旨在帮助开发者快速搭建美观、专业的数据展示界面。
@@ -16,7 +18,7 @@ DataPulse（数据脉动）是一个用于构建实时数据可视化大屏的�
 
 ```bash
 # 克隆仓库
-git clone https://github.com/ZhangMengmeng-702/DataPulse.git
+git clone git@github.com:ZhangMengmeng-702/DataPulse.git
 
 # 进入项目目录
 cd DataPulse
