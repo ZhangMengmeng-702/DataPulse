@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DataPulse 数据脉动 · 全局设计系统
+   严格匹配 plan.txt 视觉规范（色彩 / 字体 / 动效）
+   ============================================================ */
+:root {
+    /* 色彩体系 */
+    --dp-bg: #081021;
+    /* 主背景色：深空深蓝 */
+    --dp-brand: #00d8ff;
+    /* 主品牌色：冰蓝脉动 */
+    --dp-cyan: #00e4c8;
+    /* 辅助色1：科技青 */
+    --dp-purple: #7b61ff;
+    /* 辅助色2：活力紫 */
+    --dp-warn: #ff5d73;
+    /* 警示色 */
+    --dp-text: #ffffff;
+    /* 文字主色 */
+    --dp-sub: #b0c4de;
+    /* 文字辅色 */
+    --dp-border: rgba(0, 216, 255, 0.2);
+    /* 模块边框色 */
+    --dp-border-hover: rgba(0, 216, 255, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: var(--dp-bg);
+    color: var(--dp-text);
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 大屏根容器：1920*1080 基准，等比缩放自适应 */
+.dp-screen {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    transform-origin: left top;
+    background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(0, 216, 255, 0.08), transparent 60%),
+        radial-gradient(900px 500px at 100% 100%, rgba(123, 97, 255, 0.06), transparent 60%),
+        var(--dp-bg);
+}
+
+/* ---------- 模块通用样式（呼吸边框 + 悬浮上浮） ---------- */
+.dp-panel {
+    position: relative;
+    background: linear-gradient(180deg, rgba(0, 216, 255, 0.04), rgba(8, 16, 33, 0.2));
+    border: 1px solid var(--dp-border);
+    border-radius: 6px;
+    backdrop-filter: blur(2px);
+    animation: dp-breathe 3s ease-in-out infinite;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.dp-panel:hover {
+    transform: translateY(-4px);
+    border-color: var(--dp-border-hover);
+    background: linear-gradient(180deg, rgba(0, 216, 255, 0.1), rgba(8, 16, 33, 0.25));
+}
+
+/* 模块四角装饰 */
+.dp-panel::before,
+.dp-panel::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: var(--dp-brand);
+    border-style: solid;
+    opacity: 0.7;
+}
+
+.dp-panel::before {
+    top: -1px;
+    left: -1px;
+    border-width: 2px 0 0 2px;
+}
+
+.dp-panel::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 2px 2px 0;
+}
+
+/* 模块标题 */
+.dp-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dp-text);
+    padding: 10px 14px;
+}
+
+.dp-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(180deg, var(--dp-brand), var(--dp-cyan));
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--dp-brand);
+}
+
+/* ---------- 动效 ---------- */
+/* 模块呼吸：边框透明度 3 秒明暗循环 */
+@keyframes dp-breathe {
+
+    0%,
+    100% {
+        border-color: rgba(0, 216, 255, 0.12);
+    }
+
+    50% {
+        border-color: rgba(0, 216, 255, 0.35);
+    }
+}
+
+/* 数据脉动：核心数字 1 秒轻微缩放 */
+@keyframes dp-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(0, 216, 255, 0.4);
+    }
+
+    50% {
+        transform: scale(1.04);
+        text-shadow: 0 0 22px rgba(0, 216, 255, 0.9);
+    }
+}
+
+.dp-pulse-num {
+    display: inline-block;
+    animation: dp-pulse 1s ease-in-out infinite;
+}
+
+/* 数据更新闪烁提亮 */
+@keyframes dp-flash {
+    0% {
+        color: var(--dp-cyan);
+        text-shadow: 0 0 24px var(--dp-cyan);
+    }
+
+    100% {
+        color: var(--dp-brand);
+        text-shadow: 0 0 10px rgba(0, 216, 255, 0.4);
+    }
+}
+
+.dp-flash {
+    animation: dp-flash 0.8s ease-out;
+}
+
+/* 滚动日志 */
+@keyframes dp-scroll-up {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* 通用文字工具类 */
+.text-brand {
+    color: var(--dp-brand);
+}
+
+.text-cyan {
+    color: var(--dp-cyan);
+}
+
+.text-purple {
+    color: var(--dp-purple);
+}
+
+.text-warn {
+    color: var(--dp-warn);
+}
+
+.text-sub {
+    color: var(--dp-sub);
+}
+
+/* 滚动条隐藏 */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
