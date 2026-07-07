@@ -49,7 +49,7 @@ const pieOption = computed(() => ({
     itemWidth: 10,
     itemHeight: 10
   },
-  color: ['#00D8FF', '#00E4C8', '#7B61FF', '#3A7BD5', '#FF5D73'],
+  color: ['#36C9E8', '#00D9C0', '#8B7BFF', '#5B9BF0', '#FF8FA0'],
   series: [
     {
       type: 'pie',
@@ -57,12 +57,14 @@ const pieOption = computed(() => ({
       center: ['50%', '44%'],
       avoidLabelOverlap: true,
       itemStyle: {
-        borderColor: 'rgba(8,16,33,0.6)',
+        borderColor: 'rgba(6,14,31,0.55)',
         borderWidth: 2,
-        opacity: 0.85
+        opacity: 0.9,
+        shadowColor: 'rgba(0,216,255,0.18)',
+        shadowBlur: 8
       },
-      label: { color: '#B0C4DE', fontSize: 11, formatter: '{d}%' },
-      labelLine: { length: 6, length2: 6 },
+      label: { color: '#9DB2C9', fontSize: 11, formatter: '{d}%' },
+      labelLine: { length: 6, length2: 6, lineStyle: { color: 'rgba(157,178,201,0.4)' } },
       data: dataSource.value
     }
   ]
@@ -90,12 +92,14 @@ const barOption = computed(() => ({
         color: {
           type: 'linear', x: 0, y: 0, x2: 1, y2: 0,
           colorStops: [
-            { offset: 0, color: '#00D8FF' },
+            { offset: 0, color: '#1FA8C8' },
             { offset: 1, color: '#00E4C8' }
           ]
-        }
+        },
+        shadowColor: 'rgba(0,216,255,0.35)',
+        shadowBlur: 8
       },
-      label: { show: true, position: 'right', color: '#B0C4DE', fontSize: 11 }
+      label: { show: true, position: 'right', color: '#9DB2C9', fontSize: 11 }
     }
   ]
 }))
@@ -119,11 +123,18 @@ function tagText(level) {
   gap: 8px;
   height: 30px;
   font-size: 12px;
-  color: #b0c4de;
-  border-bottom: 1px dashed rgba(0, 216, 255, 0.08);
+  color: #9db2c9;
+  border-bottom: 1px solid rgba(0, 216, 255, 0.06);
+  border-radius: 4px;
+  padding: 0 4px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.log-row:hover {
+  background: rgba(0, 216, 255, 0.08);
+  color: #ffffff;
 }
 .log-time {
-  color: #00d8ff;
+  color: #5fd8f0;
   font-family: monospace;
 }
 .log-tag {

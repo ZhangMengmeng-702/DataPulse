@@ -73,8 +73,10 @@ const apiOption = computed(() => ({
       itemStyle: {
         borderRadius: [3, 3, 0, 0],
         color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [
-          { offset: 0, color: '#00E4C8' }, { offset: 1, color: '#00D8FF' }
-        ] }
+          { offset: 0, color: '#00D9C0' }, { offset: 1, color: '#1FA8C8' }
+        ] },
+        shadowColor: 'rgba(0,216,255,0.3)',
+        shadowBlur: 8
       }
     },
     {
@@ -82,7 +84,7 @@ const apiOption = computed(() => ({
       type: 'bar',
       data: apiStat.value.map((d) => d.fail),
       barWidth: 10,
-      itemStyle: { borderRadius: [3, 3, 0, 0], color: '#FF5D73' }
+      itemStyle: { borderRadius: [3, 3, 0, 0], color: '#FF5D73', shadowColor: 'rgba(255,93,115,0.35)', shadowBlur: 8 }
     }
   ]
 }))
@@ -90,10 +92,11 @@ const apiOption = computed(() => ({
 
 <style scoped>
 .biz-cell {
-  border-left: 2px solid var(--dp-brand);
-  padding-left: 10px;
-  background: rgba(0, 216, 255, 0.04);
-  border-radius: 0 4px 4px 0;
+  padding: 8px 12px;
+  background: rgba(0, 216, 255, 0.05);
+  border: 1px solid rgba(0, 216, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
 }
 .alarm-cell {
   text-align: center;
@@ -101,6 +104,6 @@ const apiOption = computed(() => ({
 .alarm-cell .num {
   font-size: 30px;
   font-weight: bold;
-  text-shadow: 0 0 12px currentColor;
+  text-shadow: 0 0 10px currentColor;
 }
 </style>

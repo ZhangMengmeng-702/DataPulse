@@ -10,9 +10,9 @@
       </span>
     </div>
 
-    <!-- 超大脉动数字 -->
+    <!-- 超大脉动数字（稳态柔和呼吸，刷新平滑过渡） -->
     <div class="flex items-baseline gap-1 mt-1">
-      <span :key="metric.value" class="dp-pulse-num text-brand font-bold leading-none num">
+      <span class="dp-pulse-num text-brand font-bold leading-none num">
         {{ metric.value }}
       </span>
       <span class="text-dp-sub text-[14px]">{{ metric.unit }}</span>
@@ -55,13 +55,13 @@ const sparkOption = computed(() => ({
       data: props.metric.trendData,
       smooth: true,
       symbol: 'none',
-      lineStyle: { width: 2, color: color.value },
+      lineStyle: { width: 2, color: color.value, shadowColor: color.value, shadowBlur: 6 },
       areaStyle: {
         color: {
           type: 'linear',
           x: 0, y: 0, x2: 0, y2: 1,
           colorStops: [
-            { offset: 0, color: color.value + '55' },
+            { offset: 0, color: color.value + '40' },
             { offset: 1, color: color.value + '00' }
           ]
         }

@@ -3,28 +3,27 @@
 @tailwind utilities;
 
 /* ============================================================
-   DataPulse 数据脉动 · 全局设计系统
-   严格匹配 plan.txt 视觉规范（色彩 / 字体 / 动效）
+   DataPulse 数据脉动 · 全局设计系统（商务轻奢科技风）
+   磨砂通透 · 微光渐变边框 · 稳态柔和呼吸脉动
    ============================================================ */
 :root {
-    /* 色彩体系 */
-    --dp-bg: #081021;
-    /* 主背景色：深空深蓝 */
+    /* 色彩体系：统一高级通透色调 */
+    --dp-bg: #060e1f;
+    /* 主背景色：纯深深空（杜绝死黑） */
     --dp-brand: #00d8ff;
-    /* 主品牌色：冰蓝脉动 */
+    /* 主品牌色：通透柔光冰蓝 */
     --dp-cyan: #00e4c8;
-    /* 辅助色1：科技青 */
+    /* 辅助色1：低饱和科技青 */
     --dp-purple: #7b61ff;
-    /* 辅助色2：活力紫 */
+    /* 辅助色2：浅紫微光 */
     --dp-warn: #ff5d73;
     /* 警示色 */
     --dp-text: #ffffff;
-    /* 文字主色 */
-    --dp-sub: #b0c4de;
-    /* 文字辅色 */
-    --dp-border: rgba(0, 216, 255, 0.2);
-    /* 模块边框色 */
-    --dp-border-hover: rgba(0, 216, 255, 0.5);
+    /* 文字主色：纯白高亮 */
+    --dp-sub: #9db2c9;
+    /* 文字辅色：浅灰通透 */
+    --dp-border: rgba(0, 216, 255, 0.14);
+    --dp-glass: rgba(10, 22, 44, 0.42);
 }
 
 * {
@@ -46,6 +45,7 @@ body {
     color: var(--dp-text);
     font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
     font-size: 14px;
+    letter-spacing: 0.3px;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -56,121 +56,128 @@ body {
     height: 1080px;
     transform-origin: left top;
     background:
-        radial-gradient(1200px 600px at 50% -10%, rgba(0, 216, 255, 0.08), transparent 60%),
-        radial-gradient(900px 500px at 100% 100%, rgba(123, 97, 255, 0.06), transparent 60%),
+        radial-gradient(1100px 560px at 50% -8%, rgba(0, 216, 255, 0.06), transparent 60%),
+        radial-gradient(820px 460px at 100% 100%, rgba(123, 97, 255, 0.05), transparent 60%),
         var(--dp-bg);
 }
 
-/* ---------- 模块通用样式（呼吸边框 + 悬浮上浮） ---------- */
+/* ---------- 模块卡片：磨砂玻璃 + 1px 微光渐变细边框 ---------- */
 .dp-panel {
     position: relative;
-    background: linear-gradient(180deg, rgba(0, 216, 255, 0.04), rgba(8, 16, 33, 0.2));
-    border: 1px solid var(--dp-border);
-    border-radius: 6px;
-    backdrop-filter: blur(2px);
-    animation: dp-breathe 3s ease-in-out infinite;
-    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    background: linear-gradient(160deg, rgba(0, 216, 255, 0.045), rgba(6, 14, 31, 0.30));
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        inset 0 0 24px rgba(0, 216, 255, 0.03),
+        0 6px 22px rgba(0, 0, 0, 0.28);
+    transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s ease;
 }
 
-.dp-panel:hover {
-    transform: translateY(-4px);
-    border-color: var(--dp-border-hover);
-    background: linear-gradient(180deg, rgba(0, 216, 255, 0.1), rgba(8, 16, 33, 0.25));
+/* 1px 微光渐变细边框（mask 技术，呼吸明暗） */
+.dp-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 1px;
+    background: linear-gradient(150deg, rgba(0, 216, 255, 0.55), rgba(0, 216, 255, 0.06) 45%, rgba(123, 97, 255, 0.22));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: dp-border-breathe 3s ease-in-out infinite;
 }
 
-/* 模块四角装饰 */
-.dp-panel::before,
+/* 柔和呼吸内发光（稳态，不闪烁） */
 .dp-panel::after {
     content: '';
     position: absolute;
-    width: 12px;
-    height: 12px;
-    border-color: var(--dp-brand);
-    border-style: solid;
-    opacity: 0.7;
+    inset: 0;
+    border-radius: 12px;
+    background: radial-gradient(120% 80% at 50% 0%, rgba(0, 216, 255, 0.06), transparent 70%);
+    opacity: 0.5;
+    pointer-events: none;
+    animation: dp-glow-breathe 3s ease-in-out infinite;
 }
 
-.dp-panel::before {
-    top: -1px;
-    left: -1px;
-    border-width: 2px 0 0 2px;
-}
-
-.dp-panel::after {
-    bottom: -1px;
-    right: -1px;
-    border-width: 0 2px 2px 0;
+/* 悬浮：微上浮 + 立体阴影 */
+.dp-panel:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        inset 0 0 28px rgba(0, 216, 255, 0.05),
+        0 16px 38px rgba(0, 0, 0, 0.42),
+        0 0 22px rgba(0, 216, 255, 0.1);
 }
 
 /* 模块标题 */
 .dp-title {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 18px;
+    gap: 9px;
+    font-size: 17px;
     font-weight: 600;
     color: var(--dp-text);
-    padding: 10px 14px;
+    padding: 11px 15px 8px;
+    letter-spacing: 0.5px;
 }
 
 .dp-title::before {
     content: '';
     width: 4px;
-    height: 16px;
-    background: linear-gradient(180deg, var(--dp-brand), var(--dp-cyan));
+    height: 15px;
     border-radius: 2px;
-    box-shadow: 0 0 8px var(--dp-brand);
+    background: linear-gradient(180deg, var(--dp-brand), var(--dp-cyan));
+    box-shadow: 0 0 10px rgba(0, 216, 255, 0.5);
 }
 
-/* ---------- 动效 ---------- */
-/* 模块呼吸：边框透明度 3 秒明暗循环 */
-@keyframes dp-breathe {
+/* ---------- 动效（沉稳舒缓，无闪烁抖动） ---------- */
+/* 边框 3s 明暗渐变呼吸 */
+@keyframes dp-border-breathe {
 
     0%,
     100% {
-        border-color: rgba(0, 216, 255, 0.12);
+        opacity: 0.4;
     }
 
     50% {
-        border-color: rgba(0, 216, 255, 0.35);
+        opacity: 0.75;
     }
 }
 
-/* 数据脉动：核心数字 1 秒轻微缩放 */
+/* 内发光呼吸 */
+@keyframes dp-glow-breathe {
+
+    0%,
+    100% {
+        opacity: 0.35;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* 数据脉动：稳态柔和呼吸（轻微缩放 + 柔光） */
 @keyframes dp-pulse {
 
     0%,
     100% {
         transform: scale(1);
-        text-shadow: 0 0 10px rgba(0, 216, 255, 0.4);
+        text-shadow: 0 0 8px rgba(0, 216, 255, 0.3);
     }
 
     50% {
-        transform: scale(1.04);
-        text-shadow: 0 0 22px rgba(0, 216, 255, 0.9);
+        transform: scale(1.025);
+        text-shadow: 0 0 16px rgba(0, 216, 255, 0.5);
     }
 }
 
 .dp-pulse-num {
     display: inline-block;
-    animation: dp-pulse 1s ease-in-out infinite;
-}
-
-/* 数据更新闪烁提亮 */
-@keyframes dp-flash {
-    0% {
-        color: var(--dp-cyan);
-        text-shadow: 0 0 24px var(--dp-cyan);
-    }
-
-    100% {
-        color: var(--dp-brand);
-        text-shadow: 0 0 10px rgba(0, 216, 255, 0.4);
-    }
-}
-
-.dp-flash {
-    animation: dp-flash 0.8s ease-out;
+    animation: dp-pulse 2.6s ease-in-out infinite;
 }
 
 /* 滚动日志 */

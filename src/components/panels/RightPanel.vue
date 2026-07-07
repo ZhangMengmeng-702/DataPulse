@@ -56,13 +56,13 @@ const lineOption = computed(() => ({
     type: 'category',
     boundaryGap: false,
     data: trend24h.value.map((_, i) => `${i}:00`),
-    axisLine: { lineStyle: { color: 'rgba(176,196,222,0.3)' } },
-    axisLabel: { color: '#B0C4DE', fontSize: 10, interval: 3 }
+    axisLine: { lineStyle: { color: 'rgba(157,178,201,0.25)' } },
+    axisLabel: { color: '#9DB2C9', fontSize: 10, interval: 3 }
   },
   yAxis: {
     type: 'value',
-    splitLine: { lineStyle: { color: 'rgba(176,196,222,0.08)' } },
-    axisLabel: { color: '#B0C4DE', fontSize: 10 }
+    splitLine: { lineStyle: { color: 'rgba(157,178,201,0.07)' } },
+    axisLabel: { color: '#9DB2C9', fontSize: 10 }
   },
   series: [
     {
@@ -70,12 +70,12 @@ const lineOption = computed(() => ({
       smooth: true,
       symbol: 'none',
       data: trend24h.value,
-      lineStyle: { width: 2, color: '#00D8FF' },
+      lineStyle: { width: 2, color: '#36C9E8', shadowColor: 'rgba(0,216,255,0.5)', shadowBlur: 10 },
       areaStyle: {
         color: {
           type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
           colorStops: [
-            { offset: 0, color: 'rgba(0,216,255,0.45)' },
+            { offset: 0, color: 'rgba(0,216,255,0.32)' },
             { offset: 1, color: 'rgba(0,216,255,0.02)' }
           ]
         }
@@ -92,15 +92,15 @@ const ringOption = computed(() => ({
     itemWidth: 10,
     itemHeight: 10
   },
-  color: ['#00D8FF', '#00E4C8', '#7B61FF'],
+  color: ['#36C9E8', '#00D9C0', '#8B7BFF'],
   series: [
     {
       type: 'pie',
       radius: ['45%', '68%'],
       center: ['50%', '44%'],
       avoidLabelOverlap: true,
-      itemStyle: { borderColor: 'rgba(8,16,33,0.6)', borderWidth: 2 },
-      label: { color: '#B0C4DE', fontSize: 11, formatter: '{d}%' },
+      itemStyle: { borderColor: 'rgba(6,14,31,0.55)', borderWidth: 2, shadowColor: 'rgba(0,216,255,0.18)', shadowBlur: 8 },
+      label: { color: '#9DB2C9', fontSize: 11, formatter: '{d}%' },
       data: dataType.value
     }
   ]
@@ -123,11 +123,11 @@ const ringOption = computed(() => ({
   transition: width 0.6s ease;
 }
 .bar-fill.ok {
-  background: linear-gradient(90deg, #00d8ff, #00e4c8);
-  box-shadow: 0 0 8px rgba(0, 228, 200, 0.6);
+  background: linear-gradient(90deg, #1fa8c8, #00d9c0);
+  box-shadow: 0 0 10px rgba(0, 216, 255, 0.4);
 }
 .bar-fill.err {
   background: linear-gradient(90deg, #ff5d73, #ff8a5d);
-  box-shadow: 0 0 8px rgba(255, 93, 115, 0.6);
+  box-shadow: 0 0 10px rgba(255, 93, 115, 0.45);
 }
 </style>

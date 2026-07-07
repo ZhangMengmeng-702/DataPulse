@@ -14,14 +14,15 @@ function init() {
   ctx = canvas.getContext('2d')
   w = canvas.width = window.innerWidth
   h = canvas.height = window.innerHeight
-  const count = Math.floor((w * h) / 9000)
+  // 粒子更少，仅作氛围底纹
+  const count = Math.floor((w * h) / 16000)
   stars = Array.from({ length: count }, () => ({
     x: Math.random() * w,
     y: Math.random() * h,
-    r: Math.random() * 1 + 0.4,
-    a: Math.random() * 0.3 + 0.1,
-    vx: (Math.random() - 0.5) * 0.15,
-    vy: (Math.random() - 0.5) * 0.15
+    r: Math.random() * 0.5 + 0.3, // 更小：0.3 ~ 0.8
+    a: Math.random() * 0.1 + 0.03, // 更淡：0.03 ~ 0.13
+    vx: (Math.random() - 0.5) * 0.05, // 更慢
+    vy: (Math.random() - 0.5) * 0.05
   }))
 }
 
@@ -36,7 +37,8 @@ function draw() {
     if (s.y > h) s.y = 0
     ctx.beginPath()
     ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-    ctx.fillStyle = `rgba(0, 216, 255, ${s.a})`
+    // 柔光冰蓝，低透明度，不抢主体视线
+    ctx.fillStyle = `rgba(120, 210, 255, ${s.a})`
     ctx.fill()
   }
   raf = requestAnimationFrame(draw)

@@ -63,14 +63,14 @@ onBeforeUnmount(() => clearInterval(timer))
 
 <style scoped>
 .dp-header {
-  background: linear-gradient(180deg, rgba(0, 216, 255, 0.08), transparent);
-  border-bottom: 1px solid var(--dp-border);
+  background: linear-gradient(180deg, rgba(0, 216, 255, 0.05), transparent);
+  border-bottom: 1px solid rgba(0, 216, 255, 0.12);
 }
 .glow {
-  text-shadow: 0 0 12px rgba(0, 216, 255, 0.8);
+  text-shadow: 0 0 10px rgba(0, 216, 255, 0.55);
 }
 .title-glow {
-  text-shadow: 0 0 18px rgba(0, 216, 255, 0.45);
+  text-shadow: 0 0 14px rgba(0, 216, 255, 0.32);
 }
 .logo-mark {
   width: 38px;
@@ -80,7 +80,7 @@ onBeforeUnmount(() => clearInterval(timer))
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 14px rgba(0, 216, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 216, 255, 0.4);
 }
 .logo-mark .dot {
   width: 12px;

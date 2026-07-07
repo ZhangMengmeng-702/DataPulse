@@ -61,14 +61,14 @@ const mapOption = computed(() => ({
     bottom: '4%',
     label: { show: false },
     itemStyle: {
-      areaColor: 'rgba(0, 216, 255, 0.04)',
-      borderColor: 'rgba(0, 216, 255, 0.35)',
+      areaColor: 'rgba(0, 216, 255, 0.03)',
+      borderColor: 'rgba(0, 216, 255, 0.22)',
       borderWidth: 1,
-      shadowColor: 'rgba(0, 216, 255, 0.4)',
-      shadowBlur: 12
+      shadowColor: 'rgba(0, 216, 255, 0.25)',
+      shadowBlur: 10
     },
     emphasis: {
-      itemStyle: { areaColor: 'rgba(0, 216, 255, 0.15)' },
+      itemStyle: { areaColor: 'rgba(0, 216, 255, 0.1)' },
       label: { show: false }
     }
   },
@@ -78,13 +78,14 @@ const mapOption = computed(() => ({
       type: 'effectScatter',
       coordinateSystem: 'geo',
       data: mapPoints.value,
-      symbolSize: (val) => 6 + val[2] / 8,
+      symbolSize: (val) => 5 + val[2] / 10,
       showEffectOn: 'render',
-      rippleEffect: { brushType: 'stroke', scale: 3.5, period: 4 },
+      // 柔光渐变扩散，节奏舒缓高级
+      rippleEffect: { brushType: 'stroke', scale: 2.6, period: 5, color: 'rgba(0, 216, 255, 0.45)' },
       itemStyle: {
-        color: '#00D8FF',
-        shadowColor: '#00D8FF',
-        shadowBlur: 10
+        color: '#5fe0ff',
+        shadowColor: 'rgba(0, 216, 255, 0.6)',
+        shadowBlur: 8
       },
       zlevel: 2
     },
@@ -93,8 +94,8 @@ const mapOption = computed(() => ({
       type: 'scatter',
       coordinateSystem: 'geo',
       data: mapPoints.value.map((p) => ({ ...p, value: [p.value[0], p.value[1], p.value[2] * 0.4] })),
-      symbolSize: (val) => 3 + val[2] / 12,
-      itemStyle: { color: '#7B61FF', opacity: 0.7 },
+      symbolSize: (val) => 2.5 + val[2] / 14,
+      itemStyle: { color: 'rgba(123, 97, 255, 0.65)' },
       zlevel: 1
     }
   ]
@@ -104,8 +105,8 @@ const mapOption = computed(() => ({
 <style scoped>
 .center-map {
   background:
-    radial-gradient(600px 400px at 50% 50%, rgba(0, 216, 255, 0.06), transparent 70%),
-    linear-gradient(180deg, rgba(0, 216, 255, 0.04), rgba(8, 16, 33, 0.2));
+    radial-gradient(620px 420px at 50% 52%, rgba(0, 216, 255, 0.05), transparent 72%),
+    linear-gradient(180deg, rgba(0, 216, 255, 0.03), rgba(6, 14, 31, 0.18));
 }
 .map-center-label {
   position: absolute;
@@ -116,6 +117,6 @@ const mapOption = computed(() => ({
   pointer-events: none;
 }
 .glow {
-  text-shadow: 0 0 16px rgba(0, 216, 255, 0.8);
+  text-shadow: 0 0 14px rgba(0, 216, 255, 0.55);
 }
 </style>
